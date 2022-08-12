@@ -15,10 +15,10 @@ export default function Home() {
         />
       </div>
 
-      <div className="text-4xl font-light text-gray-700">
+      <h1 className="text-4xl font-light text-gray-700">
         <span className="ttt-purple-text font-medium">Supercharge</span> your
         Metrc workflow
-      </div>
+      </h1>
     </div>
   );
 }
