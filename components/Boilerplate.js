@@ -1,3 +1,4 @@
+import Script from "next/script";
 import Header from "./Header";
 
 export default function Boilerplate({ children }) {
