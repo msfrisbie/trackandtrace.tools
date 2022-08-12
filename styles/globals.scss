@@ -8,6 +8,16 @@
     font-family: 'Roboto', sans-serif;
 }
 
+$ttt-purple: #49276a;
+
 .ttt-purple-text {
-    color: #49276a;
+    color: $ttt-purple;
+}
+
+.ttt-purple-background {
+    background-color: $ttt-purple;
+}
+
+.ttt-purple-border {
+    border-color: $ttt-purple;
 }
