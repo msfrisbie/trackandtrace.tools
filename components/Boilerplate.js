@@ -9,21 +9,20 @@ export default function Boilerplate({ children }) {
         description="Supercharge your Metrc workflow"
       ></Header>
 
-      {/* <Script
+      <Script
         strategy="lazyOnload"
-        src={"https://www.googletagmanager.com/gtag/js?id=G-0ETS0H9HMM"}
+        src={"https://www.googletagmanager.com/gtag/js?id=G-0J5ZE5M42P"}
       />
 
       <Script strategy="lazyOnload">
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-0ETS0H9HMM', {
-          page_path: window.location.pathname,
-          });
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-0J5ZE5M42P');
       `}
-      </Script> */}
+      </Script>
 
       {children}
 
