@@ -1,23 +1,24 @@
-import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import Image from "next/image";
+import logo_svg from "../public/logo-acronym-name-1024.png";
 
 export default function Home() {
   return (
-    <div className="container">
-      <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="w-full flex flex-col items-center min-h-screen">
+      <div className="relative w-48 h-48 sm:w-96 sm:h-64 mt-12">
+        <Image
+          priority
+          className=""
+          src={logo_svg}
+          alt={"Track & Trace Tools"}
+          layout="fill"
+          objectFit="contain"
+        />
+      </div>
 
-      <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-      </main>
-
-      <Footer />
+      <div className="text-4xl font-light text-gray-700">
+        <span className="ttt-purple-text font-medium">Supercharge</span> your
+        Metrc workflow
+      </div>
     </div>
-  )
+  );
 }
