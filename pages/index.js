@@ -27,7 +27,7 @@ export default function Home() {
         <div className="px-6 sm:px-0 py-8 flex flex-col items-stretch">
           <a
             className="text-center shadow-2xl text-lg font-medium px-12 py-6 text-2xl text-white rounded-lg bg-purple-900 hover:opacity-80"
-            href="#"
+            href="https://chrome.google.com/webstore/detail/dfljickgkbfaoiifheibjpejloipegcb"
             target="_blank"
           >
             INSTALL FOR CHROME
