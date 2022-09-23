@@ -64,7 +64,10 @@ export default function Home() {
               <FontAwesomeIcon icon={faUserGroup} className="pr-2" /> COMMUNITY
             </a>
           </div>
-          <div className="text-center text-5xl font-light ttt-purple-text pt-20 pb-4">
+          <div
+            id="faq"
+            className="text-center text-5xl font-light ttt-purple-text pt-20 pb-4"
+          >
             FAQ
           </div>
           <div className="pb-12 flex flex-col text-start items-stretch gap-8 text-lg p-8">
