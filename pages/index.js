@@ -52,7 +52,7 @@ export default function Home() {
           <div className="px-6 sm:px-0 flex flex-col items-stretch">
             <a
               className="text-center text-lg font-medium px-12 py-6 text-2xl ttt-purple-text rounded-lg ttt-purple-border border hover:bg-purple-900 hover:text-white shadow-lg"
-              href="https://msfrisbie.wixsite.com/track-trace-tools"
+              href="https://track-trace-tools.talkyard.net/latest"
               target="_blank"
             >
               <FontAwesomeIcon icon={faUserGroup} className="pr-2" /> COMMUNITY
