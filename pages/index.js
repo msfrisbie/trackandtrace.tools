@@ -124,7 +124,7 @@ export default function Home() {
             <div>
               If you would like a custom feature made for your company,{" "}
               <a className="ttt-purple-text underline" href={email}>
-                email me directly
+                send an email
               </a>{" "}
               to ask about this.{" "}
             </div>
