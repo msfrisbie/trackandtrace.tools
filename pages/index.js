@@ -10,7 +10,7 @@ const githubUrl = "https://github.com/msfrisbie/track-trace-tools";
 const githubReleasesUrl =
   "https://github.com/msfrisbie/track-trace-tools/releases";
 const forumUrl = "https://track-trace-tools.talkyard.net/latest";
-const email = "msfrisbie+ttt@gmail.com";
+const email = "mailto:msfrisbie+ttt@gmail.com";
 const mitLicenseUrl =
   "https://github.com/msfrisbie/track-trace-tools/blob/master/LICENSE.md";
 
@@ -75,8 +75,9 @@ export default function Home() {
               What is Track &amp; Trace Tools?
             </div>
             <div>
-              Track &amp; Trace Tools (TTT) is a Chrome extension that
-              integrates with Metrc. It is not affiliated with Metrc.
+              Track &amp; Trace Tools (TTT) is an open source Chrome extension
+              that integrates with Metrc to add extra features. It is not
+              affiliated with Metrc.
             </div>
             <hr></hr>
             <div className="font-bold ttt-purple-text opacity-75">
@@ -128,15 +129,15 @@ export default function Home() {
               If you would like a custom feature made for your company,{" "}
               <a className="ttt-purple-text underline" href={email}>
                 send an email
-              </a>{" "}
-              to ask about this.{" "}
+              </a>
+              .
             </div>
             <hr></hr>
             <div className="font-bold ttt-purple-text opacity-75">
               What does "open source" mean?
             </div>
             <div>
-              The Track &amp; Trace Tools code is{" "}
+              The Track &amp; Trace Tools source code is{" "}
               <a
                 className="ttt-purple-text underline"
                 href={githubUrl}
@@ -159,7 +160,7 @@ export default function Home() {
               What does the MIT license mean?
             </div>
             <div>
-              The MIT license can be found{" "}
+              You can read the MIT license{" "}
               <a
                 href={mitLicenseUrl}
                 target="_blank"
@@ -167,7 +168,7 @@ export default function Home() {
               >
                 here
               </a>
-              . There are a couple important provisions:
+              . Some things to note:
               <ul className="list-disc ml-4 my-6 flex flex-col gap-4">
                 <li>Track &amp; Trace Tools has no warranty of any kind.</li>
                 <li>
