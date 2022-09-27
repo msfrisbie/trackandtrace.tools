@@ -5,7 +5,7 @@ export default function OpenSourceCannabisProjectSection({ className }) {
       className={`flex flex-col items-center ${className}`}
     >
       <div className="px-6 sm:px-0 flex flex-col items-stretch max-w-md">
-        <div class="text-2xl text-center ttt-purple-text italic opacity-70 mt-12">
+        <div className="text-2xl text-center ttt-purple-text italic opacity-70 mt-12">
           "Operators in the cannabis industry stand to massively benefit from
           open source software."
         </div>
@@ -15,7 +15,7 @@ export default function OpenSourceCannabisProjectSection({ className }) {
         <div className="pb-12 flex flex-col text-start items-stretch gap-8 text-lg p-8">
           <div>
             The{" "}
-            <span class="ttt-purple-text font-bold">
+            <span className="ttt-purple-text font-bold">
               Open Source Cannabis Project (OSCP)
             </span>{" "}
             is an initiative to support the struggling cannabis industry with
@@ -23,7 +23,7 @@ export default function OpenSourceCannabisProjectSection({ className }) {
             ideas:
           </div>
 
-          <ul class="list-disc ml-4 flex flex-col gap-4">
+          <ul className="list-disc ml-4 flex flex-col gap-4">
             <li>
               The cannabis industry is grossly underserved in most sectors,
               especially software.
