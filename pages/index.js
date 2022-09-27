@@ -1,4 +1,5 @@
 import FaqSection from "@components/FaqSection";
+import OpenSourceCannabisProjectSection from "@components/OpenSourceCannabisProjectSection";
 import { faChrome } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -29,7 +30,7 @@ export default function Home() {
             </h1>
             <div className="px-6 sm:px-0 mb-16 flex flex-col items-stretch">
               <a
-                className="text-center text-lg font-medium px-12 py-6 text-2xl ttt-purple-text rounded-lg ttt-purple-border border hover:bg-purple-900 hover:text-white shadow-md"
+                className="text-center text-lg font-medium px-12 py-6 text-2xl ttt-purple-text rounded-lg ttt-purple-border border hover:bg-purple-900 hover:text-white shadow-md cursor-pointer"
                 href={webStoreUrl}
                 target="_blank"
               >
@@ -37,27 +38,10 @@ export default function Home() {
                 CHROME
               </a>
             </div>
-            {/* <div className="px-6 sm:px-0 flex flex-col items-stretch">
-            <a
-              className="text-center text-lg font-medium px-12 py-6 text-2xl ttt-purple-text rounded-lg ttt-purple-border border hover:bg-purple-900 hover:text-white shadow-lg"
-              href={githubUrl}
-              target="_blank"
-            >
-              <FontAwesomeIcon icon={faGithub} className="pr-2" /> SOURCE CODE
-            </a>
-          </div>
-          <div className="px-6 sm:px-0 flex flex-col items-stretch">
-            <a
-              className="text-center text-lg font-medium px-12 py-6 text-2xl ttt-purple-text rounded-lg ttt-purple-border border hover:bg-purple-900 hover:text-white shadow-lg"
-              href={forumUrl}
-              target="_blank"
-            >
-              <FontAwesomeIcon icon={faUserGroup} className="pr-2" /> COMMUNITY
-            </a>
-          </div> */}
           </div>
         </div>
         <FaqSection className="bg-purple-100"></FaqSection>
+        <OpenSourceCannabisProjectSection></OpenSourceCannabisProjectSection>
       </div>
     </>
   );

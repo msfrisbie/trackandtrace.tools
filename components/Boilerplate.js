@@ -1,5 +1,6 @@
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
+  faCode,
   faQuestionCircle,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
@@ -54,7 +55,7 @@ export default function Boilerplate({ children }) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto w-full justify-center sm:gap-8 ttt-purple-text-force">
-              <Nav.Link href="#faq" className=" opacity-80 hover:opacity-100">
+              <Nav.Link href="/faq" className=" opacity-80 hover:opacity-100">
                 <FontAwesomeIcon icon={faQuestionCircle} className="pr-2" /> FAQ
               </Nav.Link>
               <Nav.Link
@@ -62,7 +63,7 @@ export default function Boilerplate({ children }) {
                 href={githubUrl}
                 className=" opacity-80 hover:opacity-100"
               >
-                <FontAwesomeIcon icon={faGithub} className="pr-2" /> SOURCE CODE
+                <FontAwesomeIcon icon={faGithub} className="pr-2" /> CODE
               </Nav.Link>
               <Nav.Link
                 target="_blank"
@@ -71,6 +72,12 @@ export default function Boilerplate({ children }) {
               >
                 <FontAwesomeIcon icon={faUserGroup} className="pr-2" />{" "}
                 COMMUNITY
+              </Nav.Link>
+              <Nav.Link
+                href="/open-source-cannabis-project"
+                className=" opacity-80 hover:opacity-100"
+              >
+                <FontAwesomeIcon icon={faCode} className="pr-2" /> OPEN SOURCE
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
