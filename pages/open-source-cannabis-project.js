@@ -1,3 +1,4 @@
+import Header from "@components/Header";
 import OpenSourceCannabisProjectSection from "@components/OpenSourceCannabisProjectSection";
 
 export default function OpenSourceCannabisProject() {
