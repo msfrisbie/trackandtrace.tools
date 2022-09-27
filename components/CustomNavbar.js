@@ -21,6 +21,7 @@ export default function CustomNavbar() {
   return (
     <Navbar bg="white" expand="lg">
       <Container>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Brand
           href="/"
           style={{ width: "40px", height: "40px", position: "relative" }}
@@ -33,7 +34,6 @@ export default function CustomNavbar() {
             objectFit="contain"
           />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto w-full justify-center sm:gap-8 ttt-purple-text-force">
             <Nav.Link
