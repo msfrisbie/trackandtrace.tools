@@ -2,7 +2,7 @@ export default function OpenSourceCannabisProjectSection({ className }) {
   return (
     <div
       id="open-source-cannabis-project"
-      className={`flex flex-col items-center ${className}`}
+      className={`flex flex-col items-center px-6 ${className}`}
     >
       <div className="flex flex-col items-stretch max-w-md gap-16 my-16">
         <div className="text-2xl text-center ttt-purple-text italic opacity-70 mt-12">

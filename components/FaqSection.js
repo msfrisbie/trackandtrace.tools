@@ -9,7 +9,7 @@ import {
 
 export default function FaqSection({ className }) {
   return (
-    <div id="faq" className={`flex flex-col items-center ${className}`}>
+    <div id="faq" className={`flex flex-col items-center px-6 ${className}`}>
       <div className="flex flex-col items-stretch max-w-md gap-16 my-16">
         <div className="text-center text-5xl font-light ttt-purple-text">
           FAQ

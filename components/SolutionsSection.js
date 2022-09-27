@@ -3,7 +3,10 @@ import { Button } from "react-bootstrap";
 
 export default function SolutionsSection({ className }) {
   return (
-    <div id="solutions" className={`flex flex-col items-center ${className}`}>
+    <div
+      id="solutions"
+      className={`flex flex-col items-center px-6 ${className}`}
+    >
       <div className="flex flex-col items-stretch max-w-md gap-16 my-16">
         <div className="text-center text-5xl font-light ttt-purple-text">
           Solutions
