@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
+$ttt-purple: #49276a;
+
+$theme-colors: (
+  "primary": $ttt-purple,
+);
+
+@import "~bootstrap/scss/bootstrap";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,10 +16,30 @@
   font-family: "Roboto", sans-serif;
 }
 
-$ttt-purple: #49276a;
-
 .ttt-purple-text {
-  color: $ttt-purple;
+  &,
+  &:hover,
+  &:visited,
+  &:active,
+  & *,
+  & *:hover,
+  & *:visited,
+  & *:active {
+    color: $ttt-purple;
+  }
+}
+
+.ttt-purple-text-force {
+  &,
+  &:hover,
+  &:visited,
+  &:active,
+  & *,
+  & *:hover,
+  & *:visited,
+  & *:active {
+    color: $ttt-purple !important;
+  }
 }
 
 .ttt-purple-background {
