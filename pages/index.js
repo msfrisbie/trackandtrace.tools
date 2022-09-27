@@ -1,5 +1,6 @@
 import FaqSection from "@components/FaqSection";
 import OpenSourceCannabisProjectSection from "@components/OpenSourceCannabisProjectSection";
+import SolutionsSection from "@components/SolutionsSection";
 import { faChrome } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -30,7 +31,7 @@ export default function Home() {
             </h1>
             <div className="px-6 sm:px-0 mb-16 flex flex-col items-stretch">
               <a
-                className="text-center text-lg font-medium px-12 py-6 text-2xl ttt-purple-text rounded-lg ttt-purple-border border hover:bg-purple-900 hover:text-white shadow-md cursor-pointer"
+                className="text-center text-lg font-medium px-12 py-6 text-2xl ttt-purple-text rounded-lg ttt-purple-border border hover:bg-purple-900 hover:text-white shadow-md cursor-pointer no-underline"
                 href={webStoreUrl}
                 target="_blank"
               >
@@ -42,6 +43,7 @@ export default function Home() {
         </div>
         <FaqSection className="bg-purple-100"></FaqSection>
         <OpenSourceCannabisProjectSection></OpenSourceCannabisProjectSection>
+        <SolutionsSection className="bg-purple-100"></SolutionsSection>
       </div>
     </>
   );

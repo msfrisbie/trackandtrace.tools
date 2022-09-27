@@ -1,11 +1,7 @@
-import styles from './Footer.module.css'
-
 export default function Footer() {
   return (
-    <>
-      <footer className={styles.footer}>
-        Made with <img src="/netliheart.svg" alt="Netlify Logo" className={styles.logo} /> for you
-      </footer>
-    </>
-  )
+    <footer className="flex flex-col items-center justify-center p-8 text-sm text-gray-300">
+      Copyright Track &amp; Trace Tools 2022
+    </footer>
+  );
 }
