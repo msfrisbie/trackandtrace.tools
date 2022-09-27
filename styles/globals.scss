@@ -20,11 +20,7 @@ $theme-colors: (
   &,
   &:hover,
   &:visited,
-  &:active,
-  & *,
-  & *:hover,
-  & *:visited,
-  & *:active {
+  &:active {
     color: $ttt-purple;
   }
 }
