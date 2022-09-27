@@ -10,11 +10,11 @@ import {
 export default function FaqSection({ className }) {
   return (
     <div id="faq" className={`flex flex-col items-center ${className}`}>
-      <div className="px-6 sm:px-0 flex flex-col items-stretch max-w-md">
-        <div className="text-center text-5xl font-light ttt-purple-text pt-20 pb-4">
+      <div className="flex flex-col items-stretch max-w-md gap-16 my-16">
+        <div className="text-center text-5xl font-light ttt-purple-text">
           FAQ
         </div>
-        <div className="pb-12 flex flex-col text-start items-stretch gap-8 text-lg p-8">
+        <div className="flex flex-col text-start items-stretch gap-8 text-lg">
           <div className="font-bold ttt-purple-text opacity-75">
             What is Track &amp; Trace Tools?
           </div>

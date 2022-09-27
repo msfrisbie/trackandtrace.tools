@@ -4,11 +4,11 @@ import { Button } from "react-bootstrap";
 export default function SolutionsSection({ className }) {
   return (
     <div id="solutions" className={`flex flex-col items-center ${className}`}>
-      <div className="px-6 sm:px-0 flex flex-col items-stretch max-w-md py-20">
-        <div className="text-center text-5xl font-light ttt-purple-text pb-4">
+      <div className="flex flex-col items-stretch max-w-md gap-16 my-16">
+        <div className="text-center text-5xl font-light ttt-purple-text">
           Solutions
         </div>
-        <div className="pb-12 flex flex-col text-start items-stretch gap-8 text-lg p-8">
+        <div className="flex flex-col text-start items-stretch gap-8 text-lg">
           <div className="font-bold ttt-purple-text opacity-75">
             No two cannabis businesses are alike.
           </div>

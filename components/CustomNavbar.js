@@ -19,7 +19,7 @@ export default function CustomNavbar() {
   const prefix = router.asPath === "/" ? "#" : "/";
 
   return (
-    <Navbar collapseOnSelect bg="white" expand="lg">
+    <Navbar bg="white" expand="lg">
       <Container>
         <Navbar.Brand
           href="/"

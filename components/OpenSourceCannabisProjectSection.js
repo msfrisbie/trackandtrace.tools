@@ -4,15 +4,15 @@ export default function OpenSourceCannabisProjectSection({ className }) {
       id="open-source-cannabis-project"
       className={`flex flex-col items-center ${className}`}
     >
-      <div className="px-6 sm:px-0 flex flex-col items-stretch max-w-md">
+      <div className="flex flex-col items-stretch max-w-md gap-16 my-16">
         <div className="text-2xl text-center ttt-purple-text italic opacity-70 mt-12">
           "Operators in the cannabis industry stand to massively benefit from
           open source software."
         </div>
-        <div className="text-center text-5xl font-light ttt-purple-text pt-20 pb-4">
+        <div className="text-center text-5xl font-light ttt-purple-text">
           Open Source Cannabis Project
         </div>
-        <div className="pb-12 flex flex-col text-start items-stretch gap-8 text-lg p-8">
+        <div className="flex flex-col text-start items-stretch gap-8 text-lg">
           <div>
             The{" "}
             <span className="ttt-purple-text font-bold">
