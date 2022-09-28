@@ -4,8 +4,14 @@ import SolutionsSection from "@components/SolutionsSection";
 import { faChrome } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Carousel from "react-bootstrap/Carousel";
 import { webStoreUrl } from "../consts";
+import cultivatorTools from "../public/cultivator_tools.png";
+import dashboard from "../public/dashboard.png";
+import harvest from "../public/harvest.png";
 import logo from "../public/logo-acronym-name-inverted-1024.png";
+import packageContext from "../public/package_context.png";
+import packageSearch from "../public/package_search.png";
 
 export default function Home() {
   return (
@@ -39,6 +45,58 @@ export default function Home() {
                 CHROME
               </a>
             </div>
+          </div>
+        </div>
+        <div className="mb-16 flex flex-col items-center">
+          <div className="max-w-4xl">
+            <Carousel variant="dark">
+              <Carousel.Item className="px-16 sm:px-24 py-24">
+                <Image src={dashboard} alt={"Dashboard"} />
+                <Carousel.Caption>
+                  <div>
+                    Easily navigate your licenses from the Track &amp; Trace
+                    Tools dashboard.
+                  </div>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item className="px-16 sm:px-24 py-24">
+                <Image src={packageSearch} alt={"Package Search"} />
+
+                <Carousel.Caption>
+                  <div>
+                    Search packages, transfers, plants, and tags right in the
+                    page.
+                  </div>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item className="px-16 sm:px-24 py-24">
+                <Image src={packageContext} alt={"Package Context Menu"} />
+
+                <Carousel.Caption>
+                  <div>Quickly access manifest and lab test PDFs.</div>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item className="px-16 sm:px-24 py-24">
+                <Image src={cultivatorTools} alt={"Cultivator Tools"} />
+
+                <Carousel.Caption>
+                  <div>
+                    Track &amp; Trace Tools can manage plants, packages, sales,
+                    tags, and transfers.
+                  </div>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item className="px-16 sm:px-24 py-24">
+                <Image src={harvest} alt={"Bulk Harvest"} />
+
+                <Carousel.Caption>
+                  <div>
+                    Track &amp; Trace Tools can harvest, move, destroy, void,
+                    and finalize in bulk.
+                  </div>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
           </div>
         </div>
         <FaqSection className="bg-purple-100"></FaqSection>
