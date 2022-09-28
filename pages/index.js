@@ -51,7 +51,7 @@ export default function Home() {
           <div className="max-w-4xl">
             <Carousel variant="dark">
               <Carousel.Item className="px-16 sm:px-24 py-24">
-                <Image src={dashboard} alt={"Dashboard"} />
+                <Image src={dashboard} alt={"Dashboard"} priority />
                 <Carousel.Caption>
                   <div>
                     Easily navigate your licenses from the Track &amp; Trace
@@ -60,7 +60,7 @@ export default function Home() {
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item className="px-16 sm:px-24 py-24">
-                <Image src={packageSearch} alt={"Package Search"} />
+                <Image src={packageSearch} alt={"Package Search"} priority />
 
                 <Carousel.Caption>
                   <div>
@@ -70,14 +70,22 @@ export default function Home() {
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item className="px-16 sm:px-24 py-24">
-                <Image src={packageContext} alt={"Package Context Menu"} />
+                <Image
+                  src={packageContext}
+                  alt={"Package Context Menu"}
+                  priority
+                />
 
                 <Carousel.Caption>
                   <div>Quickly access manifest and lab test PDFs.</div>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item className="px-16 sm:px-24 py-24">
-                <Image src={cultivatorTools} alt={"Cultivator Tools"} />
+                <Image
+                  src={cultivatorTools}
+                  alt={"Cultivator Tools"}
+                  priority
+                />
 
                 <Carousel.Caption>
                   <div>
@@ -87,7 +95,7 @@ export default function Home() {
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item className="px-16 sm:px-24 py-24">
-                <Image src={harvest} alt={"Bulk Harvest"} />
+                <Image src={harvest} alt={"Bulk Harvest"} priority />
 
                 <Carousel.Caption>
                   <div>
