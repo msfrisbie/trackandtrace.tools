@@ -51,18 +51,11 @@ export default function Scan({ className }) {
       `${window.location.origin}/.netlify/functions/updateSet`
     );
 
-    console.log(newTags);
-
-    if (!newTags.length) {
-      console.log("empty");
-      return;
-    }
-
     url.searchParams.set("nonce", uuidv4());
     url.searchParams.set("tagSetId", activeTagSetId);
     url.searchParams.set("addTags", newTags.join(","));
 
-    const { tagSet } = await fetch(url.href);
+    const { tagSet } = await fetch(url.href).then((r) => r.json());
 
     setTagSet(tagSet.sort());
   };

@@ -27,19 +27,31 @@ const handler: Handler = async (event, context) => {
   const tagsToAdd = addTags ? addTags.split(",") : [];
   const tagsToRemove = removeTags ? removeTags.split(",") : [];
 
-  const [expire, sAdd, sRemove, sMembers] = await client
-    .multi()
-    .expire(tagSetKey, THIRTY_DAYS)
-    .sAdd(tagSetKey, tagsToAdd)
-    .sRem(tagSetKey, tagsToRemove)
-    .sMembers(tagSetKey)
-    .exec();
+  console.log(tagsToAdd);
+
+  let tagSet = [];
+  try {
+    await client.expire(tagSetKey, THIRTY_DAYS);
+
+    if (tagsToAdd.length > 0) {
+      await client.sAdd(tagSetKey, tagsToAdd);
+    }
+    if (tagsToRemove.length > 0) {
+      await client.sRem(tagSetKey, tagsToRemove);
+    }
+
+    tagSet = await client.sMembers(tagSetKey);
+  } catch (e) {
+    console.log(e);
+  }
 
   await client.disconnect();
 
   return {
     statusCode: 200,
-    tagSet: sMembers,
+    body: JSON.stringify({
+      tagSet,
+    }),
   };
 };
 
