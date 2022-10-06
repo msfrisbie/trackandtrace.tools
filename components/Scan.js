@@ -1,60 +1,63 @@
-import React, { useEffect, useRef, useState } from "react";
+import _ from "lodash";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  Form,
+  InputGroup,
+  Modal,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
+import Scanner from "./Scanner";
 
 const uuidRegex =
-  /[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/;
-const metrcTagRegex = /[A-Z0-9]{24}/;
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+const metrcTagRegex = /^[A-F0-9]{24}$/;
 
 const SCAN_USER_ID = "SCAN_USER_ID";
 
 export default function Scan({ className }) {
-  const videoEl = useRef(null);
-  const [isBrowserSupported, setIsBrowserSupported] = useState(true);
+  let buffer = [];
+
   const [activeTagSetId, setActiveTagSetId] = useState(null);
+  const [tagSetUrl, setTagSetUrl] = useState("");
   const [tagSet, setTagSet] = useState([]);
-  const [currentTag, setCurrentTag] = useState("");
 
-  const handleChange = async (event) => {
-    setCurrentTag(event.target.value);
+  const [showModal, setShowModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
-    console.log("value is:", event.target.value);
-  };
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseToast = () => setShowToast(false);
+  const handleShowToast = () => setShowToast(true);
 
-  const handleClick = async (event) => {
-    event.preventDefault();
-
-    // 👇️ value of input field
-    console.log("handleClick 👉️", currentTag);
-
-    if (currentTag) {
-      addTags([currentTag]);
-
-      setCurrentTag("");
+  // TODO buffer
+  const onBarcodeDetect = (barcode) => {
+    if (barcode.match(metrcTagRegex)) {
+      buffer.push(barcode);
+      flushBarcodeBuffer();
     }
   };
 
-  const refreshSetData = async () => {
-    const tagSetUrl = new URL(
-      `${window.location.origin}/.netlify/functions/updateSet`
-    );
+  const flushBarcodeBuffer = _.debounce(async () => {
+    await updateTagSet({ addTags: buffer });
+    buffer = [];
+  }, 250);
 
-    tagSetUrl.searchParams.set("nonce", uuidv4());
-    tagSetUrl.searchParams.set("tagSetId", activeTagSetId);
-
-    const { tagSet } = await fetch(tagSetUrl.href).then((r) => r.json());
-
-    setTagSet(tagSet.sort());
-  };
-
-  const addTags = async (newTags) => {
+  const updateTagSet = async ({ addTags, removeTags } = {}) => {
     const url = new URL(
       `${window.location.origin}/.netlify/functions/updateSet`
     );
 
     url.searchParams.set("nonce", uuidv4());
     url.searchParams.set("tagSetId", activeTagSetId);
-    url.searchParams.set("addTags", newTags.join(","));
-
+    if (addTags) {
+      url.searchParams.set("addTags", addTags.join(","));
+    }
+    if (removeTags) {
+      url.searchParams.set("removeTags", removeTags.join(","));
+    }
     const { tagSet } = await fetch(url.href).then((r) => r.json());
 
     setTagSet(tagSet.sort());
@@ -70,62 +73,11 @@ export default function Scan({ className }) {
       url.searchParams.set("tagSetId", activeTagSetId);
       window.history.pushState({}, null, url.href);
 
-      refreshSetData();
+      updateTagSet();
+
+      setTagSetUrl(`${window.location.origin}/scan?tagSetId=${activeTagSetId}`);
     })();
   }, [activeTagSetId]);
-
-  const initializeScanner = async () => {
-    if (typeof BarcodeDetector === "undefined") {
-      setIsBrowserSupported(false);
-      return;
-    }
-
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: {
-          ideal: "environment",
-        },
-      },
-      audio: false,
-    });
-
-    const video = videoEl.current;
-
-    video.srcObject = stream;
-    await video.play();
-
-    const barcodeDetector = new BarcodeDetector({
-      formats: ["qr_code", "code_128"],
-    });
-
-    window.setInterval(async () => {
-      const barcodes = await barcodeDetector.detect(video);
-
-      if (barcodes.length <= 0) {
-        return;
-      }
-
-      alert(barcodes.map((barcode) => barcode.rawValue));
-    }, 200);
-  };
-
-  // useEffect(() => {
-  //   (async () => {
-  //     if (!userId) {
-  //       return;
-  //     }
-
-  //     const url = new URL(
-  //       `${window.location.origin}/.netlify/functions/getSets`
-  //     );
-
-  //     url.searchParams.set("nonce", uuidv4());
-  //     url.searchParams.set("userId", userId);
-
-  //     const { tagSetIds } = await fetch(url.href).then((r) => r.json());
-  //     setTagSetIds(tagSetIds);
-  //   })();
-  // }, [userId]);
 
   useEffect(() => {
     // Initialization
@@ -138,26 +90,75 @@ export default function Scan({ className }) {
       } else {
         setActiveTagSetId(uuidv4());
       }
-
-      initializeScanner();
     })();
   }, []);
 
   return (
     <>
-      <input
+      <Button variant="primary" onClick={handleShowModal}>
+        Launch modal
+      </Button>
+      <Button variant="primary" onClick={handleShowToast}>
+        Launch toast
+      </Button>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <ToastContainer position="bottom-center">
+        <Toast
+          onClose={handleCloseToast}
+          position="bottom-center"
+          show={showToast}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+        </Toast>
+      </ToastContainer>
+
+      <Form>
+        <Form.Group>
+          <InputGroup>
+            <Form.Control readOnly value={tagSetUrl} />
+            <Button variant="outline-primary">COPY URL</Button>
+          </InputGroup>
+          <Form.Label>Save and share this URL</Form.Label>
+        </Form.Group>
+      </Form>
+      {/* <input
         type="text"
         onChange={handleChange}
         value={currentTag}
         autoComplete="off"
       />
-      <h2>Current Tag: {currentTag}</h2>
-      <button onClick={handleClick}>Click</button>
-      <div>Browser supported: {isBrowserSupported.toString()}</div>
+      <h2>Current Tag: {currentTag}</h2> */}
+      {/* <button onClick={handleClick}>Click</button> */}
       <div>Active tag set id: {activeTagSetId}</div>
       <div>Active tag set: {JSON.stringify(tagSet)}</div>
 
-      <video ref={videoEl} />
+      <Scanner onBarcodeDetect={onBarcodeDetect}></Scanner>
     </>
   );
 }
