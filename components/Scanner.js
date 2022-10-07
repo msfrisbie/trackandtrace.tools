@@ -18,6 +18,7 @@ export default function Scanner({ className, onBarcodeDetect }) {
   const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   const videoEl = useRef(null);
+  const [stream, setStream] = useState(null);
 
   const initializeScanner = async () => {
     if (typeof BarcodeDetector === "undefined") {
@@ -28,22 +29,11 @@ export default function Scanner({ className, onBarcodeDetect }) {
     setIsBrowserSupported(true);
     setIsBrowserSupportEvaluated(true);
 
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: {
-          ideal: "environment",
-        },
-      },
-      audio: false,
-    });
-
-    videoEl.current.srcObject = stream;
-
     const barcodeDetector = new BarcodeDetector({
       formats: ["qr_code", "code_128"],
     });
 
-    setIsScannerOpen(true);
+    toggleStream();
 
     window.setInterval(async () => {
       let barcodes = [];
@@ -63,40 +53,44 @@ export default function Scanner({ className, onBarcodeDetect }) {
     }, 500);
   };
 
-  useEffect(() => {
-    // Initialization
-    (async () => {
-      if (isScannerOpen) {
-        videoEl.current?.play();
-      } else {
-        videoEl.current?.pause();
-      }
-    })();
-  }, [isScannerOpen]);
+  const toggleStream = async () => {
+    if (stream) {
+      stream.getTracks().forEach(function (track) {
+        if (track.readyState == "live" && track.kind === "video") {
+          track.stop();
+        }
+      });
+
+      setStream(null);
+    } else {
+      const _stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: {
+            ideal: "environment",
+          },
+        },
+        audio: false,
+      });
+
+      videoEl.current.srcObject = _stream;
+      videoEl.current.play();
+
+      setStream(_stream);
+    }
+  };
 
   useEffect(() => {
-    // Initialization
-    (async () => {
-      initializeScanner();
-    })();
+    initializeScanner();
   }, []);
-
-  let video;
 
   return (
     <>
       <div>Browser supported: {isBrowserSupported.toString()}</div>
-      <video
-        style={{ display: isScannerOpen ? "block" : "none" }}
-        ref={videoEl}
-      />
+      <video style={{ display: !!stream ? "block" : "none" }} ref={videoEl} />
       <Button variant="primary" onClick={() => onBarcodeDetect(randomTag())}>
         FAKE SCAN
       </Button>
-      <Button
-        variant="primary"
-        onClick={() => setIsScannerOpen(!isScannerOpen)}
-      >
+      <Button variant="primary" onClick={() => toggleStream()}>
         TOGGLE SCANNER
       </Button>
     </>
