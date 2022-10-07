@@ -4,6 +4,7 @@ import {
   Button,
   Form,
   InputGroup,
+  ListGroup,
   Modal,
   Toast,
   ToastContainer,
@@ -15,13 +16,15 @@ const uuidRegex =
   /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const metrcTagRegex = /^[A-F0-9]{24}$/;
 
-const SCAN_USER_ID = "SCAN_USER_ID";
+const TAG_SET_ID = "TAG_SET_ID";
 
 export default function Scan({ className }) {
-  let buffer = [];
+  let addTagsBuffer = [];
+  let removeTagsBuffer = [];
 
   const [activeTagSetId, setActiveTagSetId] = useState(null);
   const [tagSetUrl, setTagSetUrl] = useState("");
+  const [toastText, setToastText] = useState("");
   const [tagSet, setTagSet] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -35,14 +38,27 @@ export default function Scan({ className }) {
   // TODO buffer
   const onBarcodeDetect = (barcode) => {
     if (barcode.match(metrcTagRegex)) {
-      buffer.push(barcode);
+      setToastText(`Added ${barcode}`);
+      setShowToast(true);
+      addTagsBuffer.push(barcode);
       flushBarcodeBuffer();
     }
   };
 
+  const onRemoveBarcode = (barcode) => {
+    setToastText(`Removed ${barcode}`);
+    setShowToast(true);
+    removeTagsBuffer.push(barcode);
+    flushBarcodeBuffer();
+  };
+
   const flushBarcodeBuffer = _.debounce(async () => {
-    await updateTagSet({ addTags: buffer });
-    buffer = [];
+    await updateTagSet({
+      addTags: addTagsBuffer,
+      removeTags: removeTagsBuffer,
+    });
+    addTagsBuffer = [];
+    removeTagsBuffer = [];
   }, 250);
 
   const updateTagSet = async ({ addTags, removeTags } = {}) => {
@@ -52,10 +68,10 @@ export default function Scan({ className }) {
 
     url.searchParams.set("nonce", uuidv4());
     url.searchParams.set("tagSetId", activeTagSetId);
-    if (addTags) {
+    if (addTags && addTags.length > 0) {
       url.searchParams.set("addTags", addTags.join(","));
     }
-    if (removeTags) {
+    if (removeTags && removeTags.length > 0) {
       url.searchParams.set("removeTags", removeTags.join(","));
     }
     const { tagSet } = await fetch(url.href).then((r) => r.json());
@@ -85,11 +101,22 @@ export default function Scan({ className }) {
       const urlTagSetId = new URLSearchParams(window.location.search).get(
         "tagSetId"
       );
+
+      const localStorageTagSetId = localStorage.getItem(TAG_SET_ID);
+
+      let tagSetId = uuidv4();
+
       if (urlTagSetId && urlTagSetId.match(uuidRegex)) {
-        setActiveTagSetId(urlTagSetId);
-      } else {
-        setActiveTagSetId(uuidv4());
+        tagSetId = urlTagSetId;
+      } else if (
+        localStorageTagSetId &&
+        localStorageTagSetId.match(uuidRegex)
+      ) {
+        tagSetId = localStorageTagSetId;
       }
+
+      setActiveTagSetId(tagSetId);
+      localStorage.setItem(TAG_SET_ID, tagSetId);
     })();
   }, []);
 
@@ -122,19 +149,12 @@ export default function Scan({ className }) {
           onClose={handleCloseToast}
           position="bottom-center"
           show={showToast}
-          delay={3000}
+          delay={1500}
           autohide
+          className="ttt-purple-background  text-white"
         >
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+          <Toast.Body className="text-center font-mono">{toastText}</Toast.Body>
+          {/* <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body> */}
         </Toast>
       </ToastContainer>
 
@@ -147,18 +167,29 @@ export default function Scan({ className }) {
           <Form.Label>Save and share this URL</Form.Label>
         </Form.Group>
       </Form>
-      {/* <input
-        type="text"
-        onChange={handleChange}
-        value={currentTag}
-        autoComplete="off"
-      />
-      <h2>Current Tag: {currentTag}</h2> */}
-      {/* <button onClick={handleClick}>Click</button> */}
-      <div>Active tag set id: {activeTagSetId}</div>
-      <div>Active tag set: {JSON.stringify(tagSet)}</div>
 
       <Scanner onBarcodeDetect={onBarcodeDetect}></Scanner>
+
+      <div>Total tags: {tagSet.length}</div>
+
+      <div style={{ maxHeight: "100vh" }} className="overflow-y-auto">
+        <ListGroup>
+          {tagSet.map((tag) => (
+            <ListGroup.Item key={tag}>
+              <div className="flex flex-row justify-between items-center">
+                <div>{tag}</div>
+                <Button
+                  onClick={() => onRemoveBarcode(tag)}
+                  size="sm"
+                  variant="outline-danger"
+                >
+                  &#10005;
+                </Button>
+              </div>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </div>
     </>
   );
 }

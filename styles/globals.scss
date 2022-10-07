@@ -4,11 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
-$ttt-purple: #49276a;
+@import "~bootstrap/scss/bootstrap";
 
-$theme-colors: (
+$ttt-purple: #49276a;
+$custom-colors: (
   "primary": $ttt-purple,
 );
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "~bootstrap/scss/bootstrap";
 
