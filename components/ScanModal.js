@@ -182,6 +182,7 @@ export default function ScanModal() {
               </li>
               <li>Tag sets can be accessed with a shareable private URL</li>
               <li>Scan in tags from multiple devices</li>
+              <li>Create unlimited tag sets</li>
               <li>Download your tag set as a CSV</li>
               <li>Tag sets are deleted after 30 days of inactivity</li>
             </ul>
