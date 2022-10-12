@@ -22,6 +22,8 @@ import ScanUrl from "./ScanUrl";
 
 const metrcTagRegex = /^[A-F0-9]{24}$/;
 
+let refreshInterval = 3000;
+
 export default function Scan(props) {
   let addTagsBuffer = [];
   let removeTagsBuffer = [];
@@ -59,6 +61,8 @@ export default function Scan(props) {
   };
 
   const onBarcodeDetect = (barcode) => {
+    // refreshInterval = 3000;
+
     if (barcode.match(metrcTagRegex)) {
       openToast(`Added ${barcode}`);
       addTagsBuffer.push(barcode);
@@ -92,6 +96,18 @@ export default function Scan(props) {
   const onOpenTestBarcode = () => {
     setRandomTag(generateRandomTag());
     handleShowModal();
+  };
+
+  let timer = null;
+
+  const exponentialBackoffRefresh = () => {
+    refreshInterval = Math.floor(refreshInterval * 1.1);
+
+    timer = setTimeout(() => {
+      refreshTagSet("periodic");
+
+      exponentialBackoffRefresh();
+    }, refreshInterval);
   };
 
   const flushBarcodeBuffer = _.debounce(async () => {
@@ -140,8 +156,10 @@ export default function Scan(props) {
 
       setLastTouched(response.lastTouched);
 
-      if (response.tagSet) {
+      if (response.tagSet && response.tagSet.length > 0) {
         setTagSet(response.tagSet.sort());
+
+        refreshInterval = 3000;
       }
     } finally {
       setRefreshInflight(false);
@@ -153,9 +171,10 @@ export default function Scan(props) {
   }, [props.activeTagSetId]);
 
   useEffect(() => {
-    const interval = setInterval(() => refreshTagSet("periodic"), 15000);
-    // TODO show a notification page is not refreshing
-    setTimeout(() => clearInterval(interval), 1000 * 60 * 30);
+    exponentialBackoffRefresh();
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
