@@ -1,20 +1,166 @@
+import { faBarcode, faQrcode } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 
 export default function ScanModal() {
-  const [showModal, setShowModal] = useState(false);
+  const [showFaqModal, setShowFaqModal] = useState(false);
+  const [showStepsModal, setShowStepsModal] = useState(false);
+  const [scannerType, setScannerType] = useState("phone");
+  const [tagType, setTagType] = useState("demo");
 
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
+  const handleCloseFaqModal = () => setShowFaqModal(false);
+  const handleCloseStepsModal = () => setShowStepsModal(false);
+  const handleShowFaqModal = () => setShowFaqModal(true);
+  const handleShowStepsModal = () => setShowStepsModal(true);
+
+  let step1, step2, step3;
+
+  if (scannerType === "phone" && tagType === "metrc") {
+    step1 = (
+      <li>
+        <div>Get a Metrc tag to scan</div>
+      </li>
+    );
+    step2 = (
+      <li>
+        <div>Open your phone scanner</div>
+        <div className="text-black font-normal">
+          Scan barcodes using Google Chrome on your phone. Click the{" "}
+          <span className="ttt-purple-text font-bold">OPEN&nbsp;SCANNER</span>{" "}
+          button to start scanning.
+        </div>
+      </li>
+    );
+    step3 = (
+      <li>
+        <div>Scan the tag</div>
+        <div className="text-black font-normal">
+          The phone scanner will read the tag and add it to this tag set.
+        </div>
+      </li>
+    );
+  }
+  if (scannerType === "bluetooth" && tagType === "metrc") {
+    step1 = (
+      <li>
+        <div>Get a Metrc tag to scan</div>
+      </li>
+    );
+    step2 = (
+      <li>
+        <div>Set up your bluetooth scanner</div>
+        <div className="text-black font-normal">
+          Pair and connect your bluetooth scanner with this device.
+        </div>
+      </li>
+    );
+    step3 = (
+      <li>
+        <div>Scan the tag</div>
+        <div className="text-black font-normal">
+          This tool will detect bluetooth scans and add them to the tag set.
+        </div>
+      </li>
+    );
+  }
+  if (scannerType === "phone" && tagType === "demo") {
+    step1 = (
+      <>
+        <li>
+          <div>Pair phone scanner</div>
+          <div className="text-black font-normal mb-2">
+            This configuration requires another phone to scan tags with.
+          </div>
+          <div className="text-black font-normal">
+            On this device, click the{" "}
+            <FontAwesomeIcon
+              className="mx-1 ttt-purple-text text-lg"
+              icon={faQrcode}
+            />{" "}
+            button to get the pair QR. Scan it with a phone to pair.
+          </div>
+        </li>
+        <li>
+          <div>Get a Demo tag to scan</div>
+          <div className="text-black font-normal">
+            On this device, click the{" "}
+            <FontAwesomeIcon
+              className="mx-1 ttt-purple-text text-lg"
+              icon={faBarcode}
+            />{" "}
+            button to get a scannable demo tag.
+          </div>
+        </li>
+      </>
+    );
+    step2 = (
+      <li>
+        <div>Open your phone scanner</div>
+        <div className="text-black font-normal">
+          On the paired phone, click the{" "}
+          <span className="ttt-purple-text font-bold">OPEN&nbsp;SCANNER</span>{" "}
+          button to start scanning. Only Google Chrome supports phone scanning.
+        </div>
+      </li>
+    );
+    step3 = (
+      <li>
+        <div>Scan the tag</div>
+        <div className="text-black font-normal">
+          The phone scanner will read the tag and add it to this tag set.
+        </div>
+      </li>
+    );
+  }
+  if (scannerType === "bluetooth" && tagType === "demo") {
+    step1 = (
+      <li>
+        <div>Get a Demo tag to scan</div>
+        <div className="text-black font-normal">
+          Click the{" "}
+          <FontAwesomeIcon
+            className="mx-1 ttt-purple-text text-lg"
+            icon={faBarcode}
+          />{" "}
+          button to get a scannable demo tag. (Note: you'll need a second device
+          to scan with.)
+        </div>
+      </li>
+    );
+    step2 = (
+      <li>
+        <div>Set up your bluetooth scanner</div>
+        <div className="text-black font-normal">
+          Pair and connect your bluetooth scanner with this device.
+        </div>
+      </li>
+    );
+    step3 = (
+      <li>
+        <div>Scan the tag</div>
+        <div className="text-black font-normal">
+          This tool will detect bluetooth scans and add them to the tag set.
+        </div>
+      </li>
+    );
+  }
 
   return (
     <>
-      <Button variant="outline-primary" onClick={handleShowModal}>
-        {/* <FontAwesomeIcon icon={faQuestion} className="cursor-pointer" /> */}
-        What is this?
-      </Button>
+      <div className="flex flex-row justify-center gap-4">
+        <Button variant="outline-primary" onClick={handleShowStepsModal}>
+          {/* <FontAwesomeIcon icon={faQuestion} className="cursor-pointer" /> */}
+          How do I use this?
+        </Button>
 
-      <Modal show={showModal} onHide={handleCloseModal}>
+        <Button variant="outline-primary" onClick={handleShowFaqModal}>
+          {/* <FontAwesomeIcon icon={faQuestion} className="cursor-pointer" /> */}
+          FAQ
+        </Button>
+      </div>
+
+      <Modal show={showFaqModal} onHide={handleCloseFaqModal}>
         <Modal.Header closeButton>
           <Modal.Title>Metrc Tag Scanner</Modal.Title>
         </Modal.Header>
@@ -120,7 +266,47 @@ export default function ScanModal() {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleCloseModal}>
+          <Button variant="primary" onClick={handleCloseFaqModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showStepsModal} onHide={handleCloseStepsModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>How to use</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="grid grid-cols-1 sm:grid-cols-2 mb-8 mx-8 gap-2 place-items-center">
+            <div>What you're scanning:</div>
+            <Form.Select
+              size="sm"
+              value={tagType}
+              onChange={(e) => setTagType(e.target.value)}
+            >
+              <option value="demo">Demo tags</option>
+              <option value="metrc">Metrc tags</option>
+            </Form.Select>
+
+            <div>What you're scanning with:</div>
+            <Form.Select
+              size="sm"
+              value={scannerType}
+              onChange={(e) => setScannerType(e.target.value)}
+            >
+              <option value="phone">Phone scanner</option>
+              <option value="bluetooth">Bluetooth scanner</option>
+            </Form.Select>
+          </div>
+
+          <ol className="flex flex-col gap-4 list-decimal ttt-purple-text font-semibold">
+            {step1}
+            {step2}
+            {step3}
+          </ol>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseStepsModal}>
             Close
           </Button>
         </Modal.Footer>
