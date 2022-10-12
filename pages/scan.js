@@ -5,9 +5,9 @@ export default function TagScanner() {
   return (
     <>
       <Header
-        title="Tag Scanner | Track &amp; Trace Tools"
+        title="Metrc Tag Scanner | Track &amp; Trace Tools"
         url="https://www.trackandtrace.tools/scan"
-        description="Scan Metrc tags in your browser."
+        description="Scan Metrc tags with your phone or a bluetooth scanner, and download the list as a CSV"
       ></Header>
 
       <ScanGantry></ScanGantry>
