@@ -7,3 +7,5 @@ export const forumUrl = "https://track-trace-tools.talkyard.net/latest";
 export const email = "mailto:tracktracetools@gmail.com";
 export const mitLicenseUrl =
   "https://github.com/msfrisbie/track-trace-tools/blob/master/LICENSE.md";
+
+export const tagSetIdQueryParam = "tagSetId";

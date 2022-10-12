@@ -10,7 +10,7 @@ export async function getRedisClient({
     url,
   });
 
-  client.on("error", (err) => console.log("Redis Client Error", err));
+  client.on("error", (err) => console.error("Redis Client Error", err));
 
   if (autoConnect) {
     await client.connect();

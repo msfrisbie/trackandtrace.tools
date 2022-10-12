@@ -1,15 +1,16 @@
-import Scan from "@components/Scan";
 import Header from "@components/Header";
+import ScanGantry from "@components/ScanGantry";
 
-export default function Faq() {
+export default function TagScanner() {
   return (
     <>
       <Header
-        title="FAQ | Track &amp; Trace Tools"
-        url="https://www.trackandtrace.tools/faq"
-        description="Find answers to commonly asked questions about Track &amp; Trace Tools."
+        title="Tag Scanner | Track &amp; Trace Tools"
+        url="https://www.trackandtrace.tools/scan"
+        description="Scan Metrc tags in your browser."
       ></Header>
-      <Scan></Scan>
+
+      <ScanGantry></ScanGantry>
     </>
   );
 }
