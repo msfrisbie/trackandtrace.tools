@@ -123,8 +123,7 @@ export default function ScanModal() {
             className="mx-1 ttt-purple-text text-lg"
             icon={faBarcode}
           />{" "}
-          button to get a scannable demo tag. (Note: you'll need a second device
-          to scan with.)
+          button to get a scannable demo tag.
         </div>
       </li>
     );
