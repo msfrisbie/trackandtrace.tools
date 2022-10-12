@@ -45,10 +45,7 @@ export default function CustomNavbar() {
               >
                 <FontAwesomeIcon icon={faQuestionCircle} className="pr-2" /> FAQ
               </Nav.Link>
-              <Nav.Link
-                href={prefix + "scan"}
-                className=" opacity-80 hover:opacity-100"
-              >
+              <Nav.Link href="/scan" className=" opacity-80 hover:opacity-100">
                 <FontAwesomeIcon icon={faBarcode} className="pr-2" /> SCAN
               </Nav.Link>
               <Nav.Link
