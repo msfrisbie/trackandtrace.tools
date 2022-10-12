@@ -12,7 +12,7 @@ export default function ScanGantry() {
   useEffect(() => {
     (async () => {
       const urlTagSetId = new URLSearchParams(window.location.search).get(
-        tagSetId
+        tagSetIdQueryParam
       );
 
       if (urlTagSetId && urlTagSetId.match(uuidRegex)) {
