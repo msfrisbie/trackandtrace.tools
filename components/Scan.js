@@ -183,7 +183,7 @@ export default function Scan(props) {
           <ScanModal></ScanModal>
         </div>
 
-        <div className="sm:col-span-2 flex flex-row gap-8">
+        <div className="sm:col-span-2 flex flex-col items-center">
           <ScanUrl
             openToast={openToast}
             activeTagSetId={props.activeTagSetId}
@@ -196,6 +196,7 @@ export default function Scan(props) {
 
         <div className="flex flex-col gap-8">
           <div className="flex flex-row gap-8 justify-between items-center">
+            <div style={{ width: "80px" }}></div>
             <div className="text-xl font-semibold ttt-purple-text opacity-80">
               {tagSet.length} tags
             </div>

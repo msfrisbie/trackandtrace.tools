@@ -44,7 +44,7 @@ export default function ScanUrl(props) {
 
   return (
     <>
-      <Form className="flex-grow">
+      <Form className="w-full max-w-lg">
         <Form.Group>
           <InputGroup>
             <Form.Control ref={tooltipTarget} readOnly value={tagSetUrl()} />
