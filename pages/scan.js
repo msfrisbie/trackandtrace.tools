@@ -13,6 +13,7 @@ export default function TagScanner() {
         description="Scan Metrc tags with your phone or a bluetooth scanner, and download the list as a CSV"
       ></Header>
 
+      {/* For some reason, this breaks <Header> SEO when placed in _app */}
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ScanGantry></ScanGantry>
