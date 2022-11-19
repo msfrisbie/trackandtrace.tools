@@ -9,6 +9,7 @@ export default function Solutions() {
         url="https://www.trackandtrace.tools/faq"
         description="Extend Track &amp; Trace Tools to fit your business's specific compliance workflow."
       ></Header>
+      
       <SolutionsSection></SolutionsSection>
     </>
   );

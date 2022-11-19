@@ -12,7 +12,11 @@ export default function Header({ title, description, url }) {
 
         {/* Twitter Card data */}
         <meta key="twitter_card" name="twitter:card" content="summary" />
-        <meta key="twitter_site" name="twitter:site" content="@mattfriz" />
+        <meta
+          key="twitter_site"
+          name="twitter:site"
+          content="@tracktracetools"
+        />
         <meta key="twitter_title" name="twitter:title" content={title} />
         <meta
           key="twitter_description"
@@ -22,7 +26,7 @@ export default function Header({ title, description, url }) {
         <meta
           key="twitter_creator"
           name="twitter:creator"
-          content="@mattfriz"
+          content="@tracktracetools"
         />
         {/* Twitter Summary card images must be at least 120x120px */}
         <meta

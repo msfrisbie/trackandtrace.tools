@@ -9,6 +9,7 @@ export default function Solutions() {
         url="https://www.trackandtrace.tools/uninstall"
         description="Uninstalled Track &amp; Trace Tools"
       ></Header>
+
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center max-w-lg gap-12 px-6 text-center">
           <div className="text-3xl font-light ttt-purple-text pt-12">

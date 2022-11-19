@@ -10,6 +10,7 @@ export default function OpenSourceCannabisProject() {
         description="The Open Source Cannabis Project is an initiative to support the struggling cannabis industry with
         high quality open source software."
       ></Header>
+
       <OpenSourceCannabisProjectSection></OpenSourceCannabisProjectSection>
     </>
   );
