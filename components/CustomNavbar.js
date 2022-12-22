@@ -1,7 +1,6 @@
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
-  faBarcode,
-  faCode,
+  faHandHoldingDollar,
   faLightbulb,
   faQuestionCircle,
   faUserGroup,
@@ -12,7 +11,7 @@ import { useRouter } from "next/router";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { forumUrl, githubUrl } from "../consts";
+import { donateUrl, forumUrl, githubUrl } from "../consts";
 import logo from "../public/logo-square-1024.png";
 
 export default function CustomNavbar() {
@@ -45,14 +44,16 @@ export default function CustomNavbar() {
               >
                 <FontAwesomeIcon icon={faQuestionCircle} className="pr-2" /> FAQ
               </Nav.Link>
-              <Nav.Link href="/scan" className=" opacity-80 hover:opacity-100">
+              {/* <Nav.Link href="/scan" className=" opacity-80 hover:opacity-100">
                 <FontAwesomeIcon icon={faBarcode} className="pr-2" /> SCAN
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link
-                href={prefix + "open-source-cannabis-project"}
+                target="_blank"
+                href={donateUrl}
                 className=" opacity-80 hover:opacity-100"
               >
-                <FontAwesomeIcon icon={faCode} className="pr-2" /> OPEN SOURCE
+                <FontAwesomeIcon icon={faHandHoldingDollar} className="pr-2" />{" "}
+                DONATE
               </Nav.Link>
               <Nav.Link
                 href={prefix + "solutions"}

@@ -9,3 +9,4 @@ export const mitLicenseUrl =
   "https://github.com/msfrisbie/track-trace-tools/blob/master/LICENSE.md";
 
 export const tagSetIdQueryParam = "tagSetId";
+export const donateUrl = "https://buy.stripe.com/fZe9BB7Ua56yaHefYY";

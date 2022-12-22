@@ -1,3 +1,6 @@
+import { donateUrl } from "consts";
+import { Button } from "react-bootstrap";
+
 export default function OpenSourceCannabisProjectSection({ className }) {
   return (
     <div
@@ -12,6 +15,13 @@ export default function OpenSourceCannabisProjectSection({ className }) {
         <div className="text-center text-5xl font-light ttt-purple-text">
           Open Source Cannabis Project
         </div>
+
+        <div className="flex flex-col items-center">
+          <Button size="lg" variant="primary" href={donateUrl} target="_blank">
+            DONATE
+          </Button>
+        </div>
+
         <div className="flex flex-col text-start items-stretch gap-8 text-lg">
           <div>
             The{" "}
